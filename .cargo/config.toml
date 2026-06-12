@@ -1,0 +1,30 @@
+# .cargo/config.toml — rust_http
+#
+# Flags linker wasm-ld pour compatibilité WAMR sur ESP32-S3.
+#
+# PROBLÈME SANS CES FLAGS :
+#   WAMR fast interpreter alloue : init(64KB) + max_défaut(1MB) + heap(16KB) = 1.1MB
+#   Pool WAMR = 128KB → "allocate linear memory failed"
+#
+# AVEC CES FLAGS :
+#   --max-memory = --initial-memory = 64KB → pas de zone de croissance
+#   WAMR alloue : init(64KB) + heap(16KB) = 80KB < 128KB ✓
+#
+# -zstack-size=1024 :
+#   Minimum viable pour que wasm-ld génère des offsets relatifs corrects
+#   pour les données statiques (.rodata, strings).
+#   Sans ça, les pointeurs deviennent des adresses absolues natives
+#   que wasm_runtime_addr_app_to_native() ne peut pas résoudre.
+#
+# --global-base=1024 :
+#   Place les données statiques à l'offset 1024 dans la mémoire linéaire.
+#   Évite l'offset 0 qui peut être traité comme NULL par WAMR.
+
+[target.wasm32-unknown-unknown]
+rustflags = [
+    "-C", "link-arg=-zstack-size=1024",
+    "-C", "link-arg=--max-memory=65536",
+    "-C", "link-arg=--initial-memory=65536",
+    "-C", "link-arg=--global-base=1024",
+    "-C", "link-arg=--export=_start",
+]

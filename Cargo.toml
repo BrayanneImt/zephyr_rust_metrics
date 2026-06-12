@@ -1,0 +1,16 @@
+[package]
+name = "rust_metrics"
+version = "0.1.0"
+edition = "2021"
+description = "IoT Metrics Collector WASM — collecte des métriques Zephyr OS et envoi HTTP (no_std)"
+
+[[bin]]
+name = "metrics_wasm"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = "s"    # optimiser pour la taille (important pour IoT)
+lto = true
+strip = true
+
+[dependencies]
