@@ -1,5 +1,6 @@
 /target
 http_rust.wasm
+metrics_wasm.wasm
 
 /.venv
 /__pycache__

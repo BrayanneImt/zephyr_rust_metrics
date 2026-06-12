@@ -10,8 +10,8 @@ fi
 echo "[build] cargo build --release..."
 cargo build --target wasm32-unknown-unknown --release
 
-OUTPUT=target/wasm32-unknown-unknown/release/http_wasm.wasm
-DEST=http_rust.wasm
+OUTPUT=target/wasm32-unknown-unknown/release/metrics_wasm.wasm
+DEST=metrics_wasm.wasm
 
 SIZE_BEFORE=$(stat -c%s "$OUTPUT")
 echo "[build] Module brut : ${SIZE_BEFORE} octets ($(( SIZE_BEFORE / 1024 )) KB)"

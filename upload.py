@@ -18,7 +18,7 @@ import serial
 # ----------------------------------------------------------------
 PORT      = '/dev/ttyUSB0'
 BAUD      = 115200
-WASM_FILE = 'http_rust.wasm'
+WASM_FILE = 'metrics_wasm.wasm'
 
 # Délai après ouverture du port (laisse l'UART ESP32 se stabiliser)
 UART_SETTLE_SECS = 0.5
