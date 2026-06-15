@@ -1,19 +1,3 @@
-//! metrics_wasm — Collecteur de métriques Zephyr OS + envoi HTTP
-//!
-//! Métriques collectées (M1–M10) :
-//!   M1  cpu_usage_pct      — % CPU utilisé
-//!   M2  free_heap_bytes    — octets de heap libre
-//!   M3  uptime_ms          — uptime en millisecondes
-//!   M4  bytes_tx           — octets transmis réseau
-//!   M5  bytes_rx           — octets reçus réseau
-//!   M6  net_errors         — erreurs réseau cumulées
-//!   M7  stack_usage_pct    — % du stack du thread principal utilisé
-//!   M8  idle_ratio_pct     — % de temps CPU en idle
-//!   M9  rssi_dbm           — RSSI Wi-Fi en dBm (i32, valeur négative)
-//!   M10 reset_count        — nombre de resets/reboots
-//!
-//! Cible : wasm32-unknown-unknown, no_std
-
 #![cfg_attr(target_arch = "wasm32", no_std)]
 #![cfg_attr(target_arch = "wasm32", no_main)]
 
@@ -428,7 +412,7 @@ fn send_metrics(seq: u32) {
 #[no_mangle]
 pub extern "C" fn main() {
     log(b"============================================\n");
-    log(b" WASM Metrics Collector -- Zephyr OS\n");
+    log(b" WASM Metrics Collector - Zephyr OS\n");
     log(b"============================================\n");
     log(b"Metriques : CPU / Heap / Uptime / TX / RX /\n");
     log(b"            Errors / Stack / Idle / RSSI / Resets\n");
